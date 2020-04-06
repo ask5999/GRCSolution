@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+  	<head>
+
+    	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+
+    	<title>d3.js KRI Dashboard</title>
+
+		
+
+		<style>
+
+		
+
+			body
+
+			{
+
+			  	font: 10px arial;
+
+			}
+
+			
+
+		</style>
+
+		
+
+		<script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+
+		<script type="text/javascript" src="KRICard.js"></script>
+
+
+
+		<script>
+
+						
+
+				
+
+			var kricards = [];
+
+			
+
+			function createKRICard(name, zone, value, unit, period, desc)
+
+			{
+
+				var config = 
+
+				{
+
+					size: 200,
+
+					zone: zone,
+					
+					value: value,
+
+					unit: unit,
+					
+					period: period,
+
+					desc: desc
+
+				}
+
+				
+
+				kricards[name] = new KRICard(name + "KRICardContainer", config);
+
+				kricards[name].render();
+
+			}
+
+			
+
+			function createKRICards()
+
+			{
+
+				createKRICard("virus", "yellow", "50", "млн. руб.", "квартал", "Сумма прямых потерь Банка от реализации событий риска КБ");
+
+				createKRICard("fraud", "green", "0,001", "%", "квартал", "Доля жалоб клиентов ФЛ о хищении ДС с использованием социальной инженерии в общей сумме транзакций ФЛ");
+				
+				createKRICard("leak", "red", "1", "событие", "квартал", "Массовая утечка конфиденциальных данных клиентов");
+
+
+			}
+			
+
+			function initialize()
+
+			{
+
+				createKRICards();
+
+
+			}
+
+			
+
+		</script>
+
+		
+
+		
+
+	</head>
+
+	
+
+	<body onload="initialize()">
+
+		<span id="virusKRICardContainer"></span>
+
+		<span id="fraudKRICardContainer"></span>
+		
+		<span id="leakKRICardContainer"></span>
+
+	</body>
+
+	
+
+</html>
