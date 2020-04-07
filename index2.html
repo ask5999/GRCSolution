@@ -31,7 +31,7 @@
 		<script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
 
 		<script type="text/javascript" src="KRICard.js"></script>
-
+		<script type="text/javascript" src="messagingUtil.js"></script>
 
 
 		<script>
@@ -44,60 +44,96 @@
 
 			
 
-			function createKRICard(name, zone, value, unit, period, desc)
-
+			//function createKRICard(name, zone, value, unit, period, desc)
+			function createKRICard(myData)
 			{
 
-				var config = 
+				var data = myData;
+				
+				var val = data.data[0][0];
+				console.log(val);
+				
+				//var config = 
 
-				{
+				//{
 
-					size: 200,
+				//	size: 200,
 
-					zone: zone,
+				//	zone: zone,
 					
-					value: value,
+				//	value: value,
 
-					unit: unit,
+				//	unit: unit,
 					
-					period: period,
+				//	period: period,
 
-					desc: desc
+				//	desc: desc
 
-				}
+				//}
 
 				
 
-				kricards[name] = new KRICard(name + "KRICardContainer", config);
+				//kricards[name] = new KRICard(name + "KRICardContainer", config);
 
-				kricards[name].render();
+				//kricards[name].render();
 
 			}
 
 			
 
-			function createKRICards()
+			//function createKRICards()
 
-			{
+			//{
 
-				createKRICard("virus", "yellow", "50", "млн. руб.", "квартал", "Сумма прямых потерь Банка от реализации событий риска КБ");
+			//	createKRICard("virus", "yellow", "50", "млн. руб.", "квартал", "Сумма прямых потерь Банка от реализации событий риска КБ");
 
 				//createKRICard("fraud", "green", "0,001", "%", "квартал", "Доля жалоб клиентов ФЛ о хищении ДС с использованием социальной инженерии в общей сумме транзакций ФЛ");
 				
 				//createKRICard("leak", "red", "1", "событие", "квартал", "Массовая утечка конфиденциальных данных клиентов");
 
 
-			}
+			//}
 			
 
-			function initialize()
+			//function initialize()
 
-			{
+			//{
 
-				createKRICards();
+			//	createKRICards();
 
 
+			//}
+			
+			function onDataReceived(messageFromVA) {
+				if (event && event.data) {
+					var stdJson = [];
+					event.data.data.forEach(function (row) {
+						var newRow = {};
+						var t = 0;
+						for (i = 1; i < row.length; i++) {
+							t += row[i] = +row[i];
+						}
+						newRow.total = t;
+						event.data.columns.forEach(
+							function (item, index) {
+								newRow[item.label] = row[index];
+							}
+						);
+						stdJson.push(newRow);
+					});
+					stdJson.columns = [];
+					var cols = [];
+					event.data.columns.forEach(
+						function (item, index) {
+							stdJson.columns.push(item.label);
+						}
+					);
+					//d3.select("#noData").remove();
+					createKRICard(stdJson);
+				}
 			}
+
+			va.messagingUtil.setOnDataReceivedCallback(onDataReceived);
 
 			
 
