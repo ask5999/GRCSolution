@@ -32,6 +32,7 @@
 
 		<script type="text/javascript" src="KRICard.js"></script>
 		<script type="text/javascript" src="messagingUtil.js"></script>
+		<script type="text/javascript" src="contentUtil.js">
 
 
 		<script>
@@ -107,6 +108,7 @@
 			function onDataReceived(messageFromVA) {
 				if (event && event.data) {
 					var stdJson = [];
+					console.log(event.data);
 					event.data.data.forEach(function (row) {
 						var newRow = {};
 						var t = 0;
