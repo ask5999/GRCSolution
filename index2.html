@@ -34,6 +34,12 @@
 		<script type="text/javascript" src="messagingUtil.js"></script>
 		<script type="text/javascript" src="contentUtil.js">
 
+	</head>
+
+	
+
+	<body>
+		<div id="noData">Loading ... </div>
 
 		<script>
 
@@ -132,27 +138,13 @@
 						}
 					);
 					//d3.select("#noData").remove();
-					createKRICard(stdJson);
+					//createKRICard(stdJson);
 				}
 			}
 
 			va.messagingUtil.setOnDataReceivedCallback(onDataReceived);
 
-			
-
 		</script>
-
-		
-
-		
-
-	</head>
-
-	
-
-	<body>
-
-		<span id="virusKRICardContainer"></span>
 	
 
 	</body>
