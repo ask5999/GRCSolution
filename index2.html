@@ -39,7 +39,7 @@
 	
 
 	<body>
-		<div id="noData">Loading ... </div>
+		<div>Loading ... </div>
 
 		<script>
 
@@ -60,29 +60,29 @@
 				var val = data.data;
 				console.log(val);
 				
-				//var config = 
+				var config = 
 
-				//{
+				{
 
-				//	size: 200,
+					size: 200,
 
-				//	zone: zone,
+					zone: zone,
 					
-				//	value: value,
+					value: value,
 
-				//	unit: unit,
+					unit: unit,
 					
-				//	period: period,
+					period: period,
 
-				//	desc: desc
+					desc: desc
 
-				//}
+				}
 
 				
 
-				//kricards[name] = new KRICard(name + "KRICardContainer", config);
+				kricards[name] = new KRICard(name + "KRICardContainer", config);
 
-				//kricards[name].render();
+				kricards[name].render();
 
 			}
 
@@ -114,8 +114,8 @@
 			function onDataReceived(messageFromVA) {
 				if (event && event.data) {
 					var stdJson = [];
-					console.log(event.data);
-					console.log("Hello, I am here!");
+					//console.log(event.data);
+					//console.log("Hello, I am here!");
 					event.data.data.forEach(function (row) {
 						var newRow = {};
 						var t = 0;
@@ -138,7 +138,7 @@
 						}
 					);
 					//d3.select("#noData").remove();
-					//createKRICard(stdJson);
+					createKRICard(stdJson);
 				}
 			}
 
